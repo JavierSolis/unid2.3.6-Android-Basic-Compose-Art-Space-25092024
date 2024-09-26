@@ -45,6 +45,7 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.placeholder
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import kotlin.random.Random
 
 data class ImageData(
     val uriImg: String,
@@ -163,7 +164,7 @@ fun SpaceImage(
                 , // Simula un margen exterior
         ) {
             GlideImage(
-                model = "uriImg,
+                model = "$uriImg?r=${ Random.nextInt(1, 1001) }",
                 contentDescription = uriDescription,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
