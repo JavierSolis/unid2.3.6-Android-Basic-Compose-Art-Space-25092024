@@ -43,6 +43,8 @@ import androidx.compose.ui.unit.dp
 import codelab.javiersolis.unit2_3_6.i250924.artspace.ui.theme.CodeLabArtSpaceTheme
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import com.bumptech.glide.integration.compose.placeholder
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 data class ImageData(
     val uriImg: String,
@@ -55,7 +57,7 @@ data class ImageData(
 // Ejemplo de lista con datos
 val imageDataList = listOf(
     ImageData(
-        uriImg = "https://random.imagecdn.app/800/850",
+        uriImg = "https://random.imagecdn.app/500/700",
         uriDescription = "random description",
         title = "Titulo 1",
         author = "Author 1",
@@ -161,12 +163,17 @@ fun SpaceImage(
                 , // Simula un margen exterior
         ) {
             GlideImage(
-                model = uriImg,
+                model = "uriImg,
                 contentDescription = uriDescription,
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(15.dp),
-            )
+                loading = placeholder(resourceId = R.drawable.palceholder),
+
+            ){
+                it.diskCacheStrategy(DiskCacheStrategy.NONE)
+            }
             /*
             Image(
                 modifier = Modifier
